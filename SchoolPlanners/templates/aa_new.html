@@ -1,0 +1,25 @@
+{% extends "aa_base.html" %}
+{% load bootstrap4 %}
+
+{% block title %}New {% block name %}{% endblock name %}{% endblock title %}
+
+{% block content %}
+<h2 style="color: {% block color %}{% endblock color %};">New {% block name_2 %}{% endblock name_2 %}</h2>
+<br>
+<div class="row">
+    <div class="col-12 grid-margin">
+        <div class="card">
+            <div class="card-body">
+                <form action="{% block url %}{% endblock url %}" method="post">
+                    {% csrf_token %}
+                    {% bootstrap_form form %}
+                    {% buttons %}
+                        <button name="submit" class="btn btn-primary mr-2">Submit</button>
+                        <a class="btn btn-inverse-danger mr-2" href="{% block back_url %}{% endblock back_url %}">Cancel</a>
+                    {% endbuttons %}
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

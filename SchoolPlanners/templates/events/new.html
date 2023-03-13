@@ -1,0 +1,9 @@
+{% extends "aa_new.html" %}
+{% load bootstrap4 %}
+
+{% block name %}Event{% endblock name %}
+{% block name_2 %}Event{% endblock name_2 %}
+{% block color %}deepskyblue{% endblock color %}
+
+{% block url %}{% url 'SchoolPlanners:new_event' %}{% endblock url %}
+{% block back_url %}{% url 'SchoolPlanners:all_events' %}{% endblock back_url %}

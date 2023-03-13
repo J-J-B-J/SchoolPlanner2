@@ -1,0 +1,30 @@
+{% extends "aa_all.html" %}
+
+{% block title %}Subjects{% endblock title %}
+{% block color %}violet{% endblock color %}
+
+
+{% block theads %}
+<th>Name</th>
+<th>Teacher</th>
+<th>Class</th>
+<th>Summary</th>
+{% endblock theads %}
+
+
+{% block tbody %}
+{% for subject in subjects %}
+    <tr>
+        <td>
+            <a class="pl-2" href="{% url 'SchoolPlanners:subject' subject.id %}">{{ subject.name }}</a>
+        </td>
+        <td> {{ subject.teacher }} </td>
+        <td> {{ subject.class_name }} </td>
+        <td> {{ subject.current_summary }} </td>
+    </tr>
+{% empty %}
+    <tr>
+        <td>No upcoming Homework!</td>
+    </tr>
+{% endfor %}
+{% endblock tbody %}

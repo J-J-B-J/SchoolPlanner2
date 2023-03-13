@@ -1,0 +1,35 @@
+{% extends "aa_all.html" %}
+
+{% block title %}Events{% endblock title %}
+{% block color %}deepskyblue{% endblock color %}
+
+
+{% block theads %}
+<th>Title</th>
+<th>Start</th>
+<th>End</th>
+<th>Location</th>
+{% endblock theads %}
+
+
+{% block tbody %}
+{% for event in events %}
+    <tr>
+        {% if event != "BREAK" %}
+            <td>
+                <a class="pl-2" href="{% url 'SchoolPlanners:event' event.id %}">{{ event.title }}</a>
+            </td>
+            <td> {{ event.start|date:"D j M,  g:i A" }} </td>
+            <td> {{ event.end|date:"D j M,  g:i A" }} </td>
+            <td> {{ event.location }} </td>
+        {% else %}
+            <td><h5>Older Events</h5></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        {% endif %}
+    </tr>
+{% empty %}
+<tr><th>No upcoming Events!</th></tr>
+{% endfor %}
+{% endblock tbody %}

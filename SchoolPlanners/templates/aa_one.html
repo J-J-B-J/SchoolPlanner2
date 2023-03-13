@@ -1,0 +1,28 @@
+{% extends "aa_base.html" %}
+{% load bootstrap4 %}
+
+{% block title %}{% block name %}{% endblock name %}{% endblock title %}
+
+{% block content %}
+<h2 style="color: {% block color %}{% endblock color %};">{% block name_2 %}{% endblock name_2 %}</h2>
+<br>
+<div class="row">
+    <div class="col-12 grid-margin">
+        <div class="card">
+            <div class="card-body">
+                <form action="{% block url %}{% endblock url %}" method="post">
+                    {% csrf_token %}
+                    {% bootstrap_form form %}
+                    {% buttons %}
+                        <button name="submit" class="btn btn-success mr-2">Save</button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton3">
+                            <a class="dropdown-item btn-inverse-danger mr-2" href="{% block delete_url %}{% endblock delete_url %}">Yes, I'm Sure</a>
+                        </div>
+                        <button class="btn btn-danger dropdown-toggle" type="button" id="dropdownMenuButton3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Delete </button>
+                    {% endbuttons %}
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

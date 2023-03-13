@@ -1,0 +1,142 @@
+{% extends "aa_base.html" %}
+
+{% block title %}Dashboard{% endblock title %}
+
+{% block content %}
+<div class="row">
+    <div class="col-sm-4 grid-margin">
+        <div class="card">
+            <div class="card-body">
+                <h5 style="color: mediumseagreen;">Homework</h5>
+                <div class="row">
+                    <div class="col-8 col-sm-12 col-xl-8 my-auto">
+                        <div class="d-flex d-sm-block d-md-flex align-items-center">
+                            <h2 class="mb-0" style="color: mediumseagreen;">{{ homework_uncompleted_count }}</h2>
+                        </div>
+                        <p class="text-muted font-weight-normal">Uncompleted</p>
+                    </div>
+                    <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
+                        <i class="icon-lg mdi mdi-pen ml-auto" style="color: mediumseagreen"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4 grid-margin">
+        <div class="card">
+            <div class="card-body">
+                <h5 style="color: coral;">Assessments</h5>
+                <div class="row">
+                    <div class="col-8 col-sm-12 col-xl-8 my-auto">
+                        <div class="d-flex d-sm-block d-md-flex align-items-center">
+                            <h2 class="mb-0" style="color: coral">{{ assessments_uncompleted_count }}</h2>
+                        </div>
+                        <p class="text-muted font-weight-normal">Uncompleted</p>
+                    </div>
+                    <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
+                        <i class="icon-lg mdi mdi-book-variant ml-auto" style="color: coral;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4 grid-margin">
+        <div class="card">
+            <div class="card-body">
+                <h5 style="color: deepskyblue;">Events</h5>
+                <div class="row">
+                    <div class="col-8 col-sm-12 col-xl-8 my-auto">
+                        <div class="d-flex d-sm-block d-md-flex align-items-center">
+                            <h2 class="mb-0" style="color: deepskyblue">{{ events_count }}</h2>
+                        </div>
+                        <p class="text-muted font-weight-normal">Events in the Next Two Weeks</p>
+                    </div>
+                    <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
+                        <i class="icon-lg mdi mdi-calendar-clock ml-auto" style="color: deepskyblue"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-6 grid-margin">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title" style="color: mediumseagreen;">Homework</h4>
+                <div class="table-responsive table-bordered table-hover">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Task</th>
+                            <th>Due</th>
+                            <th>Status</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for homework in upcoming_homework %}
+                            <tr>
+                                <td>
+                                    <a class="pl-2" href="{% url 'SchoolPlanners:homework' homework.id %}">{{ homework.title }}</a>
+                                </td>
+                                <td> {{ homework.due_date|date:"D j M,  g:i A" }} </td>
+                                <td>
+                                    {% if homework.completed %}
+                                        <div class="badge badge-outline-success" style="width: 100px">Completed</div>
+                                    {% else %}
+                                        <div class="badge badge-outline-danger" style="width: 100px">Incomplete</div>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% empty %}
+                            <tr>
+                                <td>No upcoming Homework!</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-6 grid-margin">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title" style="color: coral;">Assessments</h4>
+                <div class="table-responsive table-bordered table-hover">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Due</th>
+                            <th>Subtasks</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for assessment in upcoming_assessments %}
+                            <tr>
+                                <td>
+                                    <a class="pl-2" href="{% url 'SchoolPlanners:assessment' assessment.id %}">{{ assessment.title }}</a>
+                                </td>
+                                <td> {{ assessment.date|date:"D j M,  g:i A" }} </td>
+                                <td>
+                                    {% if assessment.completed %}
+                                        <div class="badge badge-outline-success" style="width: 60px">{{ assessment.completed_tasks_count }} / {{ assessment.total_tasks_count }}</div>
+                                    {% else %}
+                                        <div class="badge badge-outline-danger" style="width: 60px">{{ assessment.completed_tasks_count }} / {{ assessment.total_tasks_count }}</div>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% empty %}
+                            <tr>
+                                <td>No upcoming Assessments!</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

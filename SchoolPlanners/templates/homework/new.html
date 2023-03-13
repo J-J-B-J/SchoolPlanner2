@@ -1,0 +1,9 @@
+{% extends "aa_new.html" %}
+{% load bootstrap4 %}
+
+{% block name %}Homework{% endblock name %}
+{% block name_2 %}Homework{% endblock name_2 %}
+{% block color %}mediumseagreen{% endblock color %}
+
+{% block url %}{% url 'SchoolPlanners:new_homework' %}{% endblock url %}
+{% block back_url %}{% url 'SchoolPlanners:all_homework' %}{% endblock back_url %}

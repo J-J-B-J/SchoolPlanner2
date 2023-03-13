@@ -1,0 +1,9 @@
+{% extends "aa_new.html" %}
+{% load bootstrap4 %}
+
+{% block name %}Subject{% endblock name %}
+{% block name_2 %}Subject{% endblock name_2 %}
+{% block color %}violet{% endblock color %}
+
+{% block url %}{% url 'SchoolPlanners:new_subject' %}{% endblock url %}
+{% block back_url %}{% url 'SchoolPlanners:all_subjects' %}{% endblock back_url %}

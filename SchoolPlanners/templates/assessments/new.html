@@ -1,0 +1,9 @@
+{% extends "aa_new.html" %}
+{% load bootstrap4 %}
+
+{% block name %}Assessment{% endblock name %}
+{% block name_2 %}Assessment{% endblock name_2 %}
+{% block color %}coral{% endblock color %}
+
+{% block url %}{% url 'SchoolPlanners:new_assessment' %}{% endblock url %}
+{% block back_url %}{% url 'SchoolPlanners:all_assessments' %}{% endblock back_url %}

@@ -1,0 +1,9 @@
+{% extends "aa_one.html" %}
+{% load bootstrap4 %}
+
+{% block name %}{{ homework.name }}{% endblock name %}
+{% block name_2 %}{{ homework.name }}{% endblock name_2 %}
+{% block color %}mediumseagreen{% endblock color %}
+
+{% block url %}{% url 'SchoolPlanners:homework' homework.id %}{% endblock url %}
+{% block delete_url %}{% url 'SchoolPlanners:delete_homework' homework.id %}{% endblock delete_url %}

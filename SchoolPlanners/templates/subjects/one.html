@@ -1,0 +1,9 @@
+{% extends "aa_one.html" %}
+{% load bootstrap4 %}
+
+{% block name %}{{ subject.name }}{% endblock name %}
+{% block name_2 %}{{ subject.name }}{% endblock name_2 %}
+{% block color %}violet{% endblock color %}
+
+{% block url %}{% url 'SchoolPlanners:subject' subject.id %}{% endblock url %}
+{% block delete_url %}{% url 'SchoolPlanners:delete_subject' subject.id %}{% endblock delete_url %}

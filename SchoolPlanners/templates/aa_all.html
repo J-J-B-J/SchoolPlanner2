@@ -1,0 +1,26 @@
+{% extends "aa_base.html" %}
+
+{% block content %}
+<h2 style="color: {% block color %}{% endblock color %};">{% block title %}{% endblock title %}</h2>
+<br>
+<div class="row">
+    <div class="col-12 grid-margin">
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive table-bordered table-hover">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            {% block theads %}{% endblock theads %}
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% block tbody %}{% endblock tbody %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

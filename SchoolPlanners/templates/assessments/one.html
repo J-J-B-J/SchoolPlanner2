@@ -1,0 +1,28 @@
+{% extends "aa_base.html" %}
+{% load bootstrap4 %}
+
+{% block title %}{{ assessment.title }}{% endblock title %}
+
+{% block content %}
+<h2 style="color: coral;">{{ assessment.title }}</h2>
+<br>
+<div class="row">
+    <div class="col-12 grid-margin">
+        <div class="card">
+            <div class="card-body">
+                <form action="{% url 'SchoolPlanners:assessment' assessment.id %}" method="post">
+                    {% csrf_token %}
+                    {% bootstrap_form form %}
+                    {% buttons %}
+                        <button name="submit" class="btn btn-success mr-2">Save</button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton3">
+                            <a class="dropdown-item btn-inverse-danger mr-2" href="{% url 'SchoolPlanners:delete_assessment' assessment.id %}">Yes, I'm Sure</a>
+                        </div>
+                        <button class="btn btn-danger dropdown-toggle" type="button" id="dropdownMenuButton3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Delete </button>
+                    {% endbuttons %}
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

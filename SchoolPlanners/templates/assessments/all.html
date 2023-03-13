@@ -1,0 +1,41 @@
+{% extends "aa_all.html" %}
+
+{% block title %}Assessments{% endblock title %}
+{% block color %}coral{% endblock color %}
+
+
+{% block theads %}
+<th>Name</th>
+<th>Date</th>
+<th>Subject</th>
+<th>Status</th>
+{% endblock theads %}
+
+
+{% block tbody %}
+{% for assessment in assessments %}
+    <tr>
+        {% if assessment != "BREAK" %}
+            <td>
+                <a class="pl-2" href="{% url 'SchoolPlanners:assessment' assessment.id %}">{{ assessment.title }}</a>
+            </td>
+            <td> {{ assessment.date|date:"D j M,  g:i A" }} </td>
+            <td> {{ assessment.subject }} </td>
+            <td>
+                {% if assessment.completed %}
+                    <div class="badge badge-outline-success" style="width: 60px">{{ assessment.completed_tasks_count }} / {{ assessment.total_tasks_count }}</div>
+                {% else %}
+                    <div class="badge badge-outline-danger" style="width: 60px">{{ assessment.completed_tasks_count }} / {{ assessment.total_tasks_count }}</div>
+                {% endif %}
+            </td>
+        {% else %}
+            <td><h5>Older Assessments</h5></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        {% endif %}
+    </tr>
+{% empty %}
+<tr><th>No upcoming Assessments!</th></tr>
+{% endfor %}
+{% endblock tbody %}
