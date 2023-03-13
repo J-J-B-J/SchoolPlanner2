@@ -25,4 +25,44 @@
         </div>
     </div>
 </div>
+<div class="row">
+    <div class="col-12 grid-margin">
+        <div class="card">
+            <div class="card-body">
+                <div class="card-body">
+                    <div class="table-responsive table-bordered table-hover">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Completed</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                {% for subtask in subtasks %}
+                                    <tr>
+                                        <td>
+                                            <a class="pl-2" href="{% url 'SchoolPlanners:subtask' subtask.id %}">{{ subtask.name }}</a>
+                                        </td>
+                                        <td>
+                                            {% if subtask.completed %}
+                                                <div class="badge badge-outline-success" style="width: 100px"> Completed </div>
+                                            {% else %}
+                                                <div class="badge badge-outline-danger" style="width: 100px"> Incomplete </div>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                {% empty %}
+                                <tr><th>No subtasks yet!</th></tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <br>
+                    <a class="btn btn-success mr-2" href="{% url 'SchoolPlanners:new_subtask' assessment.id %}">+ Create</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

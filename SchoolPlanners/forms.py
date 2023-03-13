@@ -39,6 +39,14 @@ class NewEventForm(forms.ModelForm):
         localized_fields = ['start', 'end']
 
 
+class NewSubTaskForm(forms.ModelForm):
+    """Form for a subtask."""
+    class Meta:
+        """Metaclass for the form."""
+        model = SubTask
+        fields = ['name']
+
+
 class EditSubjectForm(forms.ModelForm):
     """Form for editing a subject."""
     class Meta:
@@ -72,3 +80,11 @@ class EditEventForm(forms.ModelForm):
         model = Event
         fields = ['title', 'description', 'start', 'end', 'location']
         localized_fields = ['start', 'end']
+
+
+class EditSubTaskForm(forms.ModelForm):
+    """Form for a subtask."""
+    class Meta:
+        """Metaclass for the form."""
+        model = SubTask
+        fields = ['name', 'completed']

@@ -4,10 +4,10 @@ from django.forms.utils import RenderableMixin
 
 import datetime
 
-from .models import Subject, Event, Homework, Assessment
+from .models import Subject, Event, Homework, Assessment, SubTask
 from .forms import NewSubjectForm, NewHomeworkForm, NewAssessmentForm, \
-    NewEventForm, EditSubjectForm, EditHomeworkForm, EditAssessmentForm, \
-    EditEventForm
+    NewEventForm, NewSubTaskForm, EditSubjectForm, EditHomeworkForm,\
+    EditAssessmentForm,  EditEventForm, EditSubTaskForm
 
 
 def index(request):
@@ -184,9 +184,12 @@ def assessment(request, assessment_id):
     else:
         # Show form
         form = EditAssessmentForm(instance=assessment_)
+
+    subtasks = SubTask.objects.filter(assignment=assessment_)
     context = {
         'assessment': assessment_,
         'form':       form,
+        'subtasks':   subtasks,
     }
     return render(request, 'assessments/one.html', context)
 
@@ -273,3 +276,51 @@ def new_event(request):
         'form': form,
     }
     return render(request, 'events/new.html', context)
+
+
+def delete_subtask(request, assessment_id, subtask_id):
+    """The page for deleting a subtask."""
+    subtask_ = SubTask.objects.get(id=subtask_id)
+    subtask_.delete()
+    return redirect('SchoolPlanners:assessment',  assessment_id)
+
+
+def subtask(request, subtask_id):
+    """The page for editing a subtask."""
+    subtask_ = SubTask.objects.get(id=subtask_id)
+    if request.method == 'POST':
+        # Submit data
+        form = EditSubTaskForm(request.POST, instance=subtask_)
+        if form.is_valid():
+            form.save()
+            assessment_ = subtask_.assignment
+            return redirect('SchoolPlanners:assessment', assessment_.id)
+    else:
+        # Show form
+        form = EditSubTaskForm(instance=subtask_)
+    context = {
+        'subtask':    subtask_,
+        'form':       form,
+        'assessment': subtask_.assignment
+    }
+    return render(request, 'subtasks/one.html', context)
+
+
+def new_subtask(request, assessment_id):
+    """The page for creating a new subtask."""
+    if request.method == 'POST':
+        # Submit data
+        form = NewSubTaskForm(request.POST)
+        if form.is_valid():
+            newsubtask = form.save(commit=False)
+            newsubtask.assignment = Assessment.objects.get(id=assessment_id)
+            newsubtask.save()
+            return redirect('SchoolPlanners:assessment', assessment_id)
+    else:
+        # Show form
+        form = NewSubTaskForm()
+    context = {
+        'form': form,
+        'assessment': Assessment.objects.get(id=assessment_id)
+    }
+    return render(request, 'subtasks/new.html', context)

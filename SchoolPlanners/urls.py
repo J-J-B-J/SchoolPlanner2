@@ -36,4 +36,11 @@ urlpatterns = [
     path('events/<int:event_id>/delete', views.delete_event,
          name='delete_event'),
     path('events/new/', views.new_event, name='new_event'),
+
+    # Subtasks
+    path('subtasks/<int:subtask_id>/', views.subtask, name='subtask'),
+    path('assessments/<int:assessment_id>/<int:subtask_id>/delete',
+         views.delete_subtask, name='delete_subtask'),
+    path('assessments/<int:assessment_id>/newsubtask/', views.new_subtask,
+         name='new_subtask'),
 ]

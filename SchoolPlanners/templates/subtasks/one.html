@@ -1,0 +1,9 @@
+{% extends "aa_one.html" %}
+{% load bootstrap4 %}
+
+{% block name %}{{ subtask.name }}{% endblock name %}
+{% block name_2 %}{{ subtask.name }}{% endblock name_2 %}
+{% block color %}darkgrey{% endblock color %}
+
+{% block url %}{% url 'SchoolPlanners:subtask' subtask.id %}{% endblock url %}
+{% block delete_url %}{% url 'SchoolPlanners:delete_subtask' assessment.id subtask.id %}{% endblock delete_url %}

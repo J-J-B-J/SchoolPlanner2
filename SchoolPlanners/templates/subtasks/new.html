@@ -1,0 +1,9 @@
+{% extends "aa_new.html" %}
+{% load bootstrap4 %}
+
+{% block name %}Subtask{% endblock name %}
+{% block name_2 %}Subject{% endblock name_2 %}
+{% block color %}darkgrey{% endblock color %}
+
+{% block url %}{% url 'SchoolPlanners:new_subtask' assessment.id %}{% endblock url %}
+{% block back_url %}{% url 'SchoolPlanners:assessment' assessment.id %}{% endblock back_url %}
