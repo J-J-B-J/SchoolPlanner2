@@ -19,6 +19,9 @@ class NewHomeworkForm(forms.ModelForm):
         model = Homework
         fields = ['title', 'description', 'due_date', 'subject']
         localized_fields = ['due_date']
+        widgets = {
+            'due_date': forms.DateTimeInput(attrs={'type': 'datetime-local'})
+        }
 
 
 class NewAssessmentForm(forms.ModelForm):
@@ -28,6 +31,9 @@ class NewAssessmentForm(forms.ModelForm):
         model = Assessment
         fields = ['title', 'description', 'date', 'subject']
         localized_fields = ['date']
+        widgets = {
+            'date': forms.DateTimeInput(attrs={'type': 'datetime-local'})
+        }
 
 
 class NewEventForm(forms.ModelForm):
@@ -62,6 +68,9 @@ class EditHomeworkForm(forms.ModelForm):
         model = Homework
         fields = ['title', 'description', 'due_date', 'subject', 'completed']
         localized_fields = ['due_date']
+        widgets = {
+            'due_date': forms.DateTimeInput(attrs={'type': 'datetime-local'})
+        }
 
 
 class EditAssessmentForm(forms.ModelForm):
@@ -71,6 +80,9 @@ class EditAssessmentForm(forms.ModelForm):
         model = Assessment
         fields = ['title', 'description', 'date', 'subject']
         localized_fields = ['date']
+        widgets = {
+            'date': forms.DateTimeInput(attrs={'type': 'datetime-local'})
+        }
 
 
 class EditEventForm(forms.ModelForm):
@@ -80,6 +92,10 @@ class EditEventForm(forms.ModelForm):
         model = Event
         fields = ['title', 'description', 'start', 'end', 'location']
         localized_fields = ['start', 'end']
+        widgets = {
+            'start': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
+            'end': forms.DateTimeInput(attrs={'type': 'datetime-local'})
+        }
 
 
 class EditSubTaskForm(forms.ModelForm):
