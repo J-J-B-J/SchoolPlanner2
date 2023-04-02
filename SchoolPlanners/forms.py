@@ -43,6 +43,10 @@ class NewEventForm(forms.ModelForm):
         model = Event
         fields = ['title', 'description', 'start', 'end', 'location']
         localized_fields = ['start', 'end']
+        widgets = {
+            'start': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
+            'end': forms.DateTimeInput(attrs={'type': 'datetime-local'})
+        }
 
 
 class NewSubTaskForm(forms.ModelForm):
